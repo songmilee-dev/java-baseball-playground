@@ -36,4 +36,15 @@ public class BaseBall {
 
         return strikeCnt;
     }
+    int countBall(String input) {
+        int ballCnt = 0;
+        for(int i = 0; i < SIZE; i++) {
+            Character target = input.charAt(i);
+            if(answer.charAt(i) != target && answer.indexOf(target) != -1) {
+                ballCnt += 1;
+            }
+        }
+
+        return ballCnt;
+    }
 }
