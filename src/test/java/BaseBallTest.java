@@ -23,7 +23,16 @@ public class BaseBallTest {
         assertThat(isDuplicateNumber(actual)).isFalse();
     }
 
+    @Test
+    void countStrike() {
+        String twoStrikeInput = "423";
+        int strikeCnt = baseBall.countStrike(twoStrikeInput);
+
+        assertThat(strikeCnt).isEqualTo(2);
+    }
+
     private Boolean isDuplicateNumber(String value) {
         return value.charAt(0) == value.charAt(1) || value.charAt(1) == value.charAt(2) || value.charAt(2) == value.charAt(0);
     }
+
 }
