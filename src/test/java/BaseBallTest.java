@@ -31,6 +31,14 @@ public class BaseBallTest {
         assertThat(strikeCnt).isEqualTo(2);
     }
 
+    @Test
+    void countBall() {
+        String oneBallInput = "345";
+        int ballCnt = baseBall.countBall(oneBallInput);
+
+        assertThat(ballCnt).isEqualTo(1);
+    }
+
     private Boolean isDuplicateNumber(String value) {
         return value.charAt(0) == value.charAt(1) || value.charAt(1) == value.charAt(2) || value.charAt(2) == value.charAt(0);
     }
