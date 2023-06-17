@@ -80,7 +80,6 @@ public class BaseBall {
         String input;
         while (!isAnswer){
             input = inputView.getCommand();
-
             isAnswer = isCorrectAnswer(input);
             if(isAnswer) {
                 resultView.printCorrect();
@@ -91,6 +90,7 @@ public class BaseBall {
         }
 
         if(doNewGameOrQuit()) {
+            answer = generateAnswer("");
             playGame();
         }
     }

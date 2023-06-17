@@ -24,10 +24,12 @@ public class ResultView {
     public void printHint(int strikeCount, int ballCount) {
         if(strikeCount + ballCount == 0) {
             printNothing();
+            System.out.println();
             return;
         }
 
         printBall(ballCount);
         printStrike(strikeCount);
+        System.out.println();
     }
 }

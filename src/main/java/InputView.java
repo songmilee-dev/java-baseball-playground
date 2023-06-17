@@ -16,10 +16,11 @@ public class InputView {
     }
 
     public Boolean isPlayNewGame() {
-        String command;
-        do {
+        String command = "";
+
+        while (!command.contains(NEW_GAME) && !command.contains(QUIT_GAME)) {
             command = scanner.nextLine();
-        } while (command.contains(NEW_GAME) || command.contains(QUIT_GAME));
+        }
 
         return command.contains(NEW_GAME);
     }
