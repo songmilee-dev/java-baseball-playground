@@ -35,6 +35,11 @@ public class BaseBall {
         }
         return sb.toString();
     }
+
+    Boolean isCorrectAnswer(String input) {
+        return answer.equals(input);
+    }
+
     int countStrike(String input) {
         int strikeCnt = 0;
         for(int i = 0; i < SIZE; i++) {
@@ -45,6 +50,7 @@ public class BaseBall {
 
         return strikeCnt;
     }
+
     int countBall(String input) {
         int ballCnt = 0;
         for(int i = 0; i < SIZE; i++) {
@@ -56,6 +62,11 @@ public class BaseBall {
 
         return ballCnt;
     }
+
+    Boolean isStringNotEmpty(String value) {
+        return value != null && value.length() > 0;
+    }
+
     // UI
     Boolean doNewGameOrQuit() {
         resultView.printAskDoGameOrNot();
