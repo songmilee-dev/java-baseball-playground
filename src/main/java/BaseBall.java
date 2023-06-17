@@ -7,6 +7,15 @@ public class BaseBall {
     final int SIZE = 3;
 
     private String answer;
+    private InputView inputView;
+    private ResultView resultView;
+
+    public BaseBall(String defaultAnswer) {
+        resultView = new ResultView();
+        inputView = new InputView(System.in);
+        answer = generateAnswer(defaultAnswer);
+    }
+
     String generateAnswer(String defaultAnswer) {
         if(isStringNotEmpty(defaultAnswer)) {
             return defaultAnswer;
@@ -46,5 +55,32 @@ public class BaseBall {
         }
 
         return ballCnt;
+    }
+    // UI
+    Boolean doNewGameOrQuit() {
+        resultView.printAskDoGameOrNot();
+        return inputView.isPlayNewGame();
+    }
+
+    // UI
+    void playGame() {
+        boolean isAnswer = false;
+
+        String input;
+        while (!isAnswer){
+            input = inputView.getCommand();
+
+            isAnswer = isCorrectAnswer(input);
+            if(isAnswer) {
+                resultView.printCorrect();
+                break;
+            }
+
+            resultView.printHint(countStrike(input), countBall(input));
+        }
+
+        if(doNewGameOrQuit()) {
+            playGame();
+        }
     }
 }
