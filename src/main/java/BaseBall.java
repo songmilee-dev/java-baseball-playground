@@ -26,4 +26,14 @@ public class BaseBall {
         }
         return sb.toString();
     }
+    int countStrike(String input) {
+        int strikeCnt = 0;
+        for(int i = 0; i < SIZE; i++) {
+            if(answer.charAt(i) == input.charAt(i)) {
+                strikeCnt += 1;
+            }
+        }
+
+        return strikeCnt;
+    }
 }
