@@ -1,6 +1,7 @@
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import com.sun.tools.javac.util.StringUtils;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class BaseBall {
 
@@ -17,23 +18,19 @@ public class BaseBall {
     }
 
     String generateAnswer(String defaultAnswer) {
-        if(isStringNotEmpty(defaultAnswer)) {
+        if (isStringNotEmpty(defaultAnswer)) {
             return defaultAnswer;
         }
 
         // 1 ~ 9 까지 숫자 생성
-        Set<Integer> randomNumbers = new HashSet<>();
-        Random random = new Random();
-        StringBuilder sb = new StringBuilder();
+        Integer[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        List<Integer> numList = Arrays.asList(numbers);
+        Collections.shuffle(numList);
 
-        while(randomNumbers.size() < SIZE) {
-            int randomValue = random.nextInt(8) + 1;
-            if(!randomNumbers.contains(randomValue)) {
-                randomNumbers.add(randomValue);
-                sb.append(randomValue);
-            }
-        }
-        return sb.toString();
+        return numList.subList(0, 3)
+                .stream()
+                .map(i -> String.valueOf(i))
+                .collect(Collectors.joining());
     }
 
     Boolean isCorrectAnswer(String input) {
@@ -42,8 +39,8 @@ public class BaseBall {
 
     int countStrike(String input) {
         int strikeCnt = 0;
-        for(int i = 0; i < SIZE; i++) {
-            if(answer.charAt(i) == input.charAt(i)) {
+        for (int i = 0; i < SIZE; i++) {
+            if (answer.charAt(i) == input.charAt(i)) {
                 strikeCnt += 1;
             }
         }
@@ -53,9 +50,9 @@ public class BaseBall {
 
     int countBall(String input) {
         int ballCnt = 0;
-        for(int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < SIZE; i++) {
             Character target = input.charAt(i);
-            if(answer.charAt(i) != target && answer.indexOf(target) != -1) {
+            if (answer.charAt(i) != target && answer.indexOf(target) != -1) {
                 ballCnt += 1;
             }
         }
@@ -78,10 +75,12 @@ public class BaseBall {
         boolean isAnswer = false;
 
         String input;
-        while (!isAnswer){
+        while (!isAnswer) {
             input = inputView.getCommand();
+            if (input.length() != 3) continue;
+
             isAnswer = isCorrectAnswer(input);
-            if(isAnswer) {
+            if (isAnswer) {
                 resultView.printCorrect();
                 break;
             }
@@ -89,7 +88,7 @@ public class BaseBall {
             resultView.printHint(countStrike(input), countBall(input));
         }
 
-        if(doNewGameOrQuit()) {
+        if (doNewGameOrQuit()) {
             answer = generateAnswer("");
             playGame();
         }
